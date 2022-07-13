@@ -14,13 +14,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_1 = __importDefault(require("./index"));
 const db_1 = require("./db");
+const config_1 = require("./config");
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
-        const puerto = 3000;
         try {
             yield (0, db_1.connectDB)(),
-                index_1.default.listen(puerto);
-            console.log('en el puerto ', puerto);
+                index_1.default.listen(config_1.PORT);
+            console.log('en el puerto ', config_1.PORT);
         }
         catch (error) {
             console.error(error);

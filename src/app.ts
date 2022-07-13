@@ -1,12 +1,13 @@
 import app from './index';
 import { connectDB } from './db'
+import {PORT} from './config'
 
 async function main() {
-    const puerto = 3000
+    
     try {
         await connectDB(),
-        app.listen(puerto);
-        console.log('en el puerto ', puerto) 
+        app.listen(PORT);
+        console.log('en el puerto ', PORT) 
     } catch (error) {
         console.error(error)
     }

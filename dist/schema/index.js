@@ -22,6 +22,8 @@ const mutacion = new graphql_1.GraphQLObjectType({
         ELIMINAR_USUARIO: users_1.ELIMINAR_USUARIO,
         ACTUALIZAR_USUARIO: users_1.ACTUALIZAR_USUARIO,
         AGREGAR_ELEC: Electrodomesticos_1.agrgar_elec,
+        ELIMINAR_ELEC: Electrodomesticos_1.ELIMINAR_ELEC,
+        ACTUALIZAR_ELEC: Electrodomesticos_1.ACTUALIZAR_ELEC,
     },
 });
 exports.schema = new graphql_1.GraphQLSchema({

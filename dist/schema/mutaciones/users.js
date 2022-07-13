@@ -13,7 +13,7 @@ exports.ACTUALIZAR_USUARIO = exports.ELIMINAR_USUARIO = exports.CREAR_USUARIO = 
 const graphql_1 = require("graphql");
 const usuarios_1 = require("../../Entities/usuarios");
 const typesUsers_1 = require("../typesDef/typesUsers");
-//Metodo para crear un usuario en la base de datos
+//Metodo para crear un usuario en la base de datos desde graphql
 exports.CREAR_USUARIO = {
     type: typesUsers_1.typeUsers,
     args: {
@@ -39,7 +39,7 @@ exports.CREAR_USUARIO = {
         });
     }
 };
-//Metodo para Eliminar un usuario de la base de datos
+//Metodo para Eliminar un usuario de la base de datos desde graphql
 exports.ELIMINAR_USUARIO = {
     type: graphql_1.GraphQLBoolean,
     args: {
@@ -55,7 +55,7 @@ exports.ELIMINAR_USUARIO = {
         });
     }
 };
-//Metodo para Actualizar un usuario en la base de datos
+//Metodo para Actualizar un usuario en la base de datos desde graphql
 exports.ACTUALIZAR_USUARIO = {
     type: graphql_1.GraphQLBoolean,
     args: {

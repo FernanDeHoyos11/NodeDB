@@ -13,15 +13,17 @@ exports.connectDB = void 0;
 const typeorm_1 = require("typeorm");
 const Electrodomesticos_1 = require("./Entities/Electrodomesticos");
 const usuarios_1 = require("./Entities/usuarios");
+require("./config");
+const config_1 = require("./config");
 //Conexion a la base de datos con NODEJS
 const connectDB = () => __awaiter(void 0, void 0, void 0, function* () {
     yield (0, typeorm_1.createConnection)({
         type: 'mysql',
-        username: 'root',
-        password: '',
-        port: 3306,
-        host: 'localhost',
-        database: 'usuarios',
+        username: config_1.DB_USERNAME,
+        password: config_1.DB_PASSWORD,
+        port: Number(config_1.DB_PORT),
+        host: config_1.DB_HOST,
+        database: config_1.DB_NAME,
         entities: [usuarios_1.usuarios, Electrodomesticos_1.Electrodomesticos],
         synchronize: true,
         ssl: false
