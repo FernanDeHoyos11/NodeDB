@@ -120,8 +120,45 @@
       </div>
       
     </div>
+    
   </div>
+
 </header>
 
+<body>
+  <div class="col-md-12">
+    <center> <h2>Electrodomesticos</h2></center>
+   
+    <br><br>
+    <% if(elec.length>0) {%>
+    <table class="table table-bordered" border="1">
+    <thead>
+      <th>nombre</th>
+      <th>precio</th>
+      <th>Categoria</th>
+      <th>Marca</th>
+      <th>Descripcion</th>
+      
+      <th></th>
+    </thead>
+      <% for(var i=0; i<elec.length; i++) {%>
+        <tr class="quote">
+          <td><%= elec[i].nombre %></td>
+          <td><%= elec[i].Precio %></td>
+          <td><%= elec[i].Categoria %></td>
+          <td><%= elec[i].Marca%></td>
+          <td><%= elec[i].Descripcion %></td>
+          <td>
+
+            <a href="/delete/<%= elec[i].id %>" class="btn-xs btn btn-danger">Comprar</a>
+          </td>
+        </tr>
+      <% } %>
+    </table>
+    <%} else {%>
+    <p class="alert alert-warning">No hay contactos</p>
+    <% } %>
+    </div>
+</body>
  
 </html>

@@ -18,9 +18,21 @@ export const typeElec = new GraphQLObjectType({
     name: 'typeElec',
     fields: {
         id: {type: GraphQLID},
-        tipo: {type: GraphQLString},
-        marca:{type: GraphQLString},
-        precio:{type: GraphQLInt},
+        Nombre: {type: GraphQLString},
+        Precio:{type: GraphQLInt},
+        Categoria:{type: GraphQLString},
+        Marca:{type: GraphQLString},
+        Descripcion:{type: GraphQLString},
+    }
+
+})
+
+export const typeCat = new GraphQLObjectType({
+    name: 'typeCat',
+    fields: {
+        id: {type: GraphQLID},
+        NombreC: {type: GraphQLString},
+        Descripcion:{type: GraphQLString},
     }
 
 })

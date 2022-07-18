@@ -7,19 +7,28 @@ import { typeElec } from "../typesDef/typesUsers";
 export const agrgar_elec = {
     type: typeElec,
     args:{
-        tipo: {type: GraphQLString},
-        marca: {type: GraphQLString},
-        precio:{type: GraphQLInt},
+        nombre: {type: GraphQLString},
+        Precio:{type: GraphQLInt},
+        Categoria: {type: GraphQLString},
+        Marca: {type: GraphQLString}, 
+        Descripcion: {type: GraphQLString},    
     },
+
+    
+    
     async resolve(_: any, args: any){
-        const {tipo, marca, precio} = args
+        const {nombre, Precio, Categoria, Marca, Descripcion} = args
         console.log(args)
         const resul = await Electrodomesticos.insert({
-        tipo: tipo,
-        Marca: marca,
-        Precio: precio,
+        nombre: nombre,
+        Precio: Precio,
+        Categoria:Categoria,
+        Marca: Marca, 
+        Descripcion: Descripcion,
         })
+
         console.log(resul)
+        
         return {...args, id: resul.identifiers[0].id}
     }
     
@@ -47,15 +56,17 @@ export const ELIMINAR_ELEC = {
 export const ACTUALIZAR_ELEC = {
     type: GraphQLBoolean,
     args:{
-        id: {type: GraphQLID},
-        tipo: {type: GraphQLString},
+        nombre: {type: GraphQLString},
+        Precio:{type: GraphQLInt},
+        Categoria: {type: GraphQLString},
         Marca: {type: GraphQLString},
-        Precio:{type: GraphQLFloat}, 
+         
+    
     },
 
-    async resolve(_: any, {id, tipo, Marca, Precio}: any){
+    async resolve(_: any, {id, nombre, Precio, Categoria, Marca, Descripcion}: any){
     const exis_id = await Electrodomesticos.findOne({where: {id: id}})
-    const resul = await Electrodomesticos.update({id}, {tipo, Marca, Precio})
+    const resul = await Electrodomesticos.update({id}, {nombre, Precio, Categoria, Marca})
     if(resul.affected === 1) 
     console.log(resul)
     return true;

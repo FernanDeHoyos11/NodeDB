@@ -7,9 +7,13 @@ export class Electrodomesticos extends BaseEntity{
     @PrimaryGeneratedColumn()
     id: number;
     @Column()
-    tipo: string;
+    nombre: string;
+    @Column()
+    Precio: number;
+    @Column()
+    Categoria: string;
     @Column()
     Marca: string;
     @Column()
-    Precio: number;
+    Descripcion: string
 }

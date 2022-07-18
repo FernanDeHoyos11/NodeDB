@@ -9,6 +9,7 @@ import { Router } from 'express';
 import {usuarios} from './Entities/usuarios'
 import session  from 'express-session';
 import { Electrodomesticos } from './Entities/Electrodomesticos';
+import { Direccion } from './Entities/Direccion';
 
 
 const app = express();
@@ -41,6 +42,8 @@ app.set('views', path.join(__dirname, '/views'));
 app.set('views engine', 'ejs');
 
 
+
+
 //Método para Registrase
 app.post('/register', async (req, res)=>{
 	const nombre = req.body.nombre;
@@ -49,6 +52,10 @@ app.post('/register', async (req, res)=>{
 	const usuario = req.body.usuario;
 	const password = req.body.password;
 
+
+  const ciudad = req.body.Ciudad
+  const barrio = req.body.Barrio
+  const calle = req.body.Calle
   
   if(nombre != null && apellido1 != null && apellido2 != null && usuario != null && password != null){
 
@@ -73,7 +80,16 @@ app.post('/register', async (req, res)=>{
         usuario:usuario,
         password:password
       })
-      
+
+      const idus = usuario
+      console.log(idus)
+      await Direccion.insert({
+        idUsuario:idus,
+        Ciudad:ciudad,
+        Barrio:barrio,
+        Calle:calle
+      })
+
       res.render('register.ejs', {
         alert: true,
         alertTitle: "Registration",
@@ -99,6 +115,7 @@ app.post('/login', async (req, res)=> {
     console.log(usuario, password)
     const pass = await usuarios.findOne({where:{password:password }} && {where:{usuario:usuario }})
     console.log(pass?.password)
+
     if(password == pass?.password && usuario ==  pass?.usuario){
       console.log(pass?.nombre)
       req.session.loggedin = true;                
@@ -128,7 +145,9 @@ app.post('/login', async (req, res)=> {
   } 
     res.end()
   }
-      )
+)
+
+
 
 app.post('/guardar', async(req, res)=>{
     var nom = req.session.nombre
@@ -141,15 +160,25 @@ app.post('/guardar', async(req, res)=>{
 
 //rutas
 // Método para controlar que está auth en todas las páginas
-app.get('/', function(req, res){ 
+app.get('/', async function(req, res){ 
+  const elec = await Electrodomesticos.find({select: {
+    nombre: true,
+    Precio: true, 
+    Categoria: true,
+    Marca: true,
+    Descripcion: true}})
+  
+  console.log(elec)
   if (req.session.loggedin) {
 		res.render('home.ejs',{
+      
 			login: true,
-			name: req.session.nombre
-      		
-		});		
+			name: req.session.nombre		
+		}
+    );		
 	} else {
 		res.render('index.ejs',{
+      elec: elec,
 			login:false,
 			name:'Debe iniciar sesión',			
 		});				
@@ -184,6 +213,7 @@ app.get('/cart', function(req, res){
 
 app.get('/login',(req, res)=>{
   res.render('login.ejs');
+  
 })
 
 app.get('/register',(req, res)=>{
